@@ -1,0 +1,16 @@
+{
+  "name": "Hifz Planner Personal",
+  "short_name": "HifzPlanner",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F2F7F6",
+  "theme_color": "#0F1C2E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3059/3059496.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
