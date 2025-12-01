@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hifz Planner - Personal Edition</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-quran"></i> Hifz Planner
+        </div>
+        <div class="header-tag">Personal Edition</div>
+    </header>
+
+    <div class="container">
+        
+        <section class="hero-card" id="personal-section">
+            <div class="hero-content">
+                <h1 id="greeting">Esselamu Alejkum!</h1>
+                <p>Le ta përgatisim planin tënd të hifzit drejt rrugëtimit të dritës.</p>
+                
+                <div class="input-group-row">
+                    <div class="input-box">
+                        <label>Emri Juaj</label>
+                        <input type="text" id="userName" placeholder="Shkruaj emrin..." oninput="updateGreeting()">
+                    </div>
+                    <div class="input-box">
+                        <label>Niveli</label>
+                        <select id="userLevel">
+                            <option value="Fillestar">Fillestar</option>
+                            <option value="Mesatar">Mesatar</option>
+                            <option value="I Avancuar">I Avancuar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-box full-width">
+                    <label>Qëllimi Personal</label>
+                    <input type="text" id="userGoal" placeholder="p.sh. Të përfundoj Kuranin para Ramazanit...">
+                </div>
+            </div>
+        </section>
+
+        <section class="planner-card">
+            <h2><i class="fa-solid fa-sliders"></i> Konfigurimi i Planit</h2>
+            <div class="form-grid">
+                <div class="input-box">
+                    <label>Faqe Total (Kuran)</label>
+                    <input type="number" id="totalPages" value="604">
+                </div>
+                <div class="input-box">
+                    <label>Faqe të reja në ditë</label>
+                    <input type="number" id="pagesPerDay" value="2">
+                </div>
+                <div class="input-box">
+                    <label>Ditë mësimi në javë</label>
+                    <input type="number" id="daysPerWeek" value="6" max="7">
+                </div>
+                <div class="input-box">
+                    <label>Stili i Planit</label>
+                    <select id="planStyle">
+                        <option value="linear">Linear (Vetëm Faqe të Reja)</option>
+                        <option value="spiral">Spiral (Me Rishikim intensiv)</option>
+                        <option value="mixed">Mixed (I Balancuar)</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-primary" onclick="generatePlan()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Krijo Planin
+            </button>
+        </section>
+
+        <div id="results-area" class="hidden">
+            
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon-bg"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div>
+                        <h3>Kohëzgjatja</h3>
+                        <p id="totalDuration">0 Javë</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-bg"><i class="fa-solid fa-book-open"></i></div>
+                    <div>
+                        <h3>Data e Përfundimit</h3>
+                        <p id="completionDate">-</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-bg"><i class="fa-solid fa-layer-group"></i></div>
+                    <div>
+                        <h3>Intensiteti</h3>
+                        <p id="intensityLabel">Normal</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="charts-container">
+                <div class="chart-box">
+                    <h4>Shpërndarja e Kohës</h4>
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h4>Progresi i Pritshëm</h4>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </section>
+
+            <section class="schedule-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-list-check"></i> Plani Javor i Detajuar</h2>
+                    <button class="btn-secondary" onclick="downloadPDF()">
+                        <i class="fa-solid fa-file-pdf"></i> Shkarko PDF
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="planTable">
+                        <thead>
+                            <tr>
+                                <th>Java</th>
+                                <th>Faqet (Nga - Deri)</th>
+                                <th>Rishikim (Juz)</th>
+                                <th>Statusi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Hifz Planner Personal. Ndërtuar me ihlas.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
